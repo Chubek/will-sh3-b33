@@ -1,7 +1,8 @@
-import gdown
 from dotenv import dotenv_values
 import os
 import inspect
+import joblib
+from scripts.utilities import download_gdown
 
 temp = dotenv_values(".env")
 
@@ -11,11 +12,13 @@ def retrieve_name(var):
             if len(names) > 0:
                 return names[0]
 
-def download_gdown(url, path):
-    gdown.download(url, path, quiet=False)
 
 
-def dowload_all_models():
+
+def dowload_all_les():
+    if not os.path.exists(temp["MODEL_FOLDER"]):
+        os.makedirs(temp["MODEL_FOLDER"])
+
     le_status = temp['LE_STATUS']
     le_sex = temp['LE_SEX']
     le_orientation = temp['LE_ORIENTATION']
@@ -55,3 +58,84 @@ def dowload_all_models():
 
         if not os.path.exists(path):
             download_gdown(le, path)
+
+
+def load_all_les():
+    le_status = None
+    le_sex = None
+    le_orientation = None 
+    le_body_type = None
+    le_diet = None
+    le_drinks = None
+    le_drugs = None
+    le_ethnicity = None
+    le_offspring = None
+    le_pets = None
+    le_sign = None
+    le_smokes = None
+    sc_age = None
+    sc_height = None
+    sc_income = None
+
+    list_all = [le_status,
+            le_sex,
+            le_orientation, 
+            le_body_type, 
+            le_diet, 
+            le_drinks,
+            le_drugs,
+            le_ethnicity,
+            le_offspring,
+            le_pets,
+            le_sign,
+            le_smokes,
+            sc_age,
+            sc_height,
+            sc_income]
+
+    for le in list_all:
+        name = retrieve_name(le) + ".pkl"
+        path = os.path.join(temp['MODEL_FOLDER'], name)
+
+        le = joblib.load(path)
+
+
+    dict_all = {retrieve_name(le): le for le in list_all}
+
+    return dict_all
+
+
+def get_classes(le):
+    return le.classes_
+
+def encode_class(le, cls):
+    return le.transform([cls])
+
+def decode_label(le, lab):
+    return le.inverse_transform([lab])
+
+
+def get_json_lab_cls(le_dict):
+    fin_json = {}
+
+    for k, v in le_dict:
+        if not "sc" in k:
+            fin_json[k] = {l: m for l, m in zip(get_classes(v).tolist(), [encode_class(v, n) for n in get_classes(v).tolist()])}
+
+
+    return fin_json
+
+
+
+def load_le_status():
+    le_status = temp['LE_STATUS']
+
+    name = "le_status.pkl"
+    path = os.path.join(temp['MODEL_FOLDER'], name)
+
+    if not os.path.exists(path):
+        download_gdown(le_status, path)
+
+    le_status = joblib.load(path)
+
+    return le_status
