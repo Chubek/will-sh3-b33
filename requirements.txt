@@ -4,3 +4,4 @@ torch
 gdown
 python-dotenv
 flask
+tensorflow
