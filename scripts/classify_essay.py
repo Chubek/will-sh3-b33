@@ -19,4 +19,4 @@ def classify_essay(essay_text):
 
     label = le_status.inverse_transform(argmax)[0]
 
-    return label, argmax[0], outputs[argmax[0]]
+    return label, int(argmax[0]), float(outputs[argmax[0]])

@@ -28,23 +28,23 @@ def get_all_les():
 
 
 @app.route("/classify_deep", methods=["POST"])
-def classify_deep():
+def classify_deep_func():
     if request.form["mode"] == "text_label":
-        sex = int(le_dict["le_sex"].transform([request.form["sex"]])[0])
-        orientation = int(le_dict["le_orientation"].transform([request.form["orientation"]])[0])
-        body_type = int(le_dict["le_body_type"].transform([request.form["body_type"]])[0])
-        diet = int(le_dict["le_diet"].transform([request.form["diet"]])[0])
-        drinks = int(le_dict["le_drinks"].transform([request.form["drinks"]])[0])
-        drugs = int(le_dict["le_drugs"].transform([request.form["drugs"]])[0])
-        ethnicity = int(le_dict["le_ethnicity"].transform([request.form["ethnicity"]])[0])
-        offspring = int(le_dict["le_offspring"].transform([request.form["offspring"]])[0])
-        pets = int(le_dict["le_pets"].transform([request.form["pets"]])[0])
-        sign = int(le_dict["le_sign"].transform([request.form["sign"]])[0])
-        smokes = int(le_dict["le_smokes"].transform([request.form["smokes"]])[0])
-        age = int(le_dict["sc_age"].transform([request.form["age"]])[0])
-        height = int(le_dict["sc_height"].transform([request.form["height"]])[0])
-        income = int(le_dict["sc_income"].transform([request.form["income"]])[0])
-    elif request.form["mode"] == "int_labels":    
+        sex = int(le_dict["le_sex"].transform([[request.form["sex"]]])[0])
+        orientation = int(le_dict["le_orientation"].transform([[request.form["orientation"]]])[0])
+        body_type = int(le_dict["le_body_type"].transform([[request.form["body_type"]]])[0])
+        diet = int(le_dict["le_diet"].transform([[request.form["diet"]]])[0])
+        drinks = int(le_dict["le_drinks"].transform([[request.form["drinks"]]])[0])
+        drugs = int(le_dict["le_drugs"].transform([[request.form["drugs"]]])[0])
+        ethnicity = int(le_dict["le_ethnicity"].transform([[request.form["ethnicity"]]])[0])
+        offspring = int(le_dict["le_offspring"].transform([[request.form["offspring"]]])[0])
+        pets = int(le_dict["le_pets"].transform([[request.form["pets"]]])[0])
+        sign = int(le_dict["le_sign"].transform([[request.form["sign"]]])[0])
+        smokes = int(le_dict["le_smokes"].transform([[request.form["smokes"]]])[0])
+        age = int(le_dict["sc_age"].transform([[request.form["age"]]])[0])
+        height = int(le_dict["sc_height"].transform([[request.form["height"]]])[0])
+        income = int(le_dict["sc_income"].transform([[request.form["income"]]])[0])
+    elif request.form["mode"] == "int_label":    
         sex = int(request.form["sex"])
         orientation = int(request.form["orientation"])
         body_type = int(request.form["body_type"])
@@ -56,9 +56,9 @@ def classify_deep():
         pets = int(request.form["pets"])
         sign = int(request.form["sign"])
         smokes = int(request.form["smokes"])
-        age = int(request.form["age"])
-        height = int(request.form["height"])
-        income = int(request.form["income"])
+        age = int(le_dict["sc_age"].transform([[request.form["age"]]])[0])
+        height = int(le_dict["sc_height"].transform([[request.form["height"]]])[0])
+        income = int(le_dict["sc_income"].transform([[request.form["income"]]])[0])
 
     input_features = [
         sex,
@@ -84,23 +84,23 @@ def classify_deep():
     return jsonify({"class": cls, "label": label, "prob": prob})
 
 @app.route("/classify_svm", methods=["POST"])
-def classify_svm():
+def classify_svm_func():
     if request.form["mode"] == "text_label":
-        sex = int(le_dict["le_sex"].transform([request.form["sex"]])[0])
-        orientation = int(le_dict["le_orientation"].transform([request.form["orientation"]])[0])
-        body_type = int(le_dict["le_body_type"].transform([request.form["body_type"]])[0])
-        diet = int(le_dict["le_diet"].transform([request.form["diet"]])[0])
-        drinks = int(le_dict["le_drinks"].transform([request.form["drinks"]])[0])
-        drugs = int(le_dict["le_drugs"].transform([request.form["drugs"]])[0])
-        ethnicity = int(le_dict["le_ethnicity"].transform([request.form["ethnicity"]])[0])
-        offspring = int(le_dict["le_offspring"].transform([request.form["offspring"]])[0])
-        pets = int(le_dict["le_pets"].transform([request.form["pets"]])[0])
-        sign = int(le_dict["le_sign"].transform([request.form["sign"]])[0])
-        smokes = int(le_dict["le_smokes"].transform([request.form["smokes"]])[0])
-        age = int(le_dict["sc_age"].transform([request.form["age"]])[0])
-        height = int(le_dict["sc_height"].transform([request.form["height"]])[0])
-        income = int(le_dict["sc_income"].transform([request.form["income"]])[0])
-    elif request.form["mode"] == "int_labels":    
+        sex = int(le_dict["le_sex"].transform([[request.form["sex"]]])[0])
+        orientation = int(le_dict["le_orientation"].transform([[request.form["orientation"]]])[0])
+        body_type = int(le_dict["le_body_type"].transform([[request.form["body_type"]]])[0])
+        diet = int(le_dict["le_diet"].transform([[request.form["diet"]]])[0])
+        drinks = int(le_dict["le_drinks"].transform([[request.form["drinks"]]])[0])
+        drugs = int(le_dict["le_drugs"].transform([[request.form["drugs"]]])[0])
+        ethnicity = int(le_dict["le_ethnicity"].transform([[request.form["ethnicity"]]])[0])
+        offspring = int(le_dict["le_offspring"].transform([[request.form["offspring"]]])[0])
+        pets = int(le_dict["le_pets"].transform([[request.form["pets"]]])[0])
+        sign = int(le_dict["le_sign"].transform([[request.form["sign"]]])[0])
+        smokes = int(le_dict["le_smokes"].transform([[request.form["smokes"]]])[0])
+        age = int(le_dict["sc_age"].transform([[request.form["age"]]])[0])
+        height = int(le_dict["sc_height"].transform([[request.form["height"]]])[0])
+        income = int(le_dict["sc_income"].transform([[request.form["income"]]])[0])    
+    elif request.form["mode"] == "int_label":    
         sex = int(request.form["sex"])
         orientation = int(request.form["orientation"])
         body_type = int(request.form["body_type"])
@@ -112,9 +112,9 @@ def classify_svm():
         pets = int(request.form["pets"])
         sign = int(request.form["sign"])
         smokes = int(request.form["smokes"])
-        age = int(request.form["age"])
-        height = int(request.form["height"])
-        income = int(request.form["income"])
+        age = int(le_dict["sc_age"].transform([[request.form["age"]]])[0])
+        height = int(le_dict["sc_height"].transform([[request.form["height"]]])[0])
+        income = int(le_dict["sc_income"].transform([[request.form["income"]]])[0])
     
     input_features = [
         sex,
@@ -142,23 +142,23 @@ def classify_svm():
 
 
 @app.route("/classify_gb", methods=["POST"])
-def classify_gb():
+def classify_gb_func():
     if request.form["mode"] == "text_label":
-        sex = int(le_dict["le_sex"].transform([request.form["sex"]])[0])
-        orientation = int(le_dict["le_orientation"].transform([request.form["orientation"]])[0])
-        body_type = int(le_dict["le_body_type"].transform([request.form["body_type"]])[0])
-        diet = int(le_dict["le_diet"].transform([request.form["diet"]])[0])
-        drinks = int(le_dict["le_drinks"].transform([request.form["drinks"]])[0])
-        drugs = int(le_dict["le_drugs"].transform([request.form["drugs"]])[0])
-        ethnicity = int(le_dict["le_ethnicity"].transform([request.form["ethnicity"]])[0])
-        offspring = int(le_dict["le_offspring"].transform([request.form["offspring"]])[0])
-        pets = int(le_dict["le_pets"].transform([request.form["pets"]])[0])
-        sign = int(le_dict["le_sign"].transform([request.form["sign"]])[0])
-        smokes = int(le_dict["le_smokes"].transform([request.form["smokes"]])[0])
-        age = int(le_dict["sc_age"].transform([request.form["age"]])[0])
-        height = int(le_dict["sc_height"].transform([request.form["height"]])[0])
-        income = int(le_dict["sc_income"].transform([request.form["income"]])[0])
-    elif request.form["mode"] == "int_labels":    
+        sex = int(le_dict["le_sex"].transform([[request.form["sex"]]])[0])
+        orientation = int(le_dict["le_orientation"].transform([[request.form["orientation"]]])[0])
+        body_type = int(le_dict["le_body_type"].transform([[request.form["body_type"]]])[0])
+        diet = int(le_dict["le_diet"].transform([[request.form["diet"]]])[0])
+        drinks = int(le_dict["le_drinks"].transform([[request.form["drinks"]]])[0])
+        drugs = int(le_dict["le_drugs"].transform([[request.form["drugs"]]])[0])
+        ethnicity = int(le_dict["le_ethnicity"].transform([[request.form["ethnicity"]]])[0])
+        offspring = int(le_dict["le_offspring"].transform([[request.form["offspring"]]])[0])
+        pets = int(le_dict["le_pets"].transform([[request.form["pets"]]])[0])
+        sign = int(le_dict["le_sign"].transform([[request.form["sign"]]])[0])
+        smokes = int(le_dict["le_smokes"].transform([[request.form["smokes"]]])[0])
+        age = int(le_dict["sc_age"].transform([[request.form["age"]]])[0])
+        height = int(le_dict["sc_height"].transform([[request.form["height"]]])[0])
+        income = int(le_dict["sc_income"].transform([[request.form["income"]]])[0])
+    elif request.form["mode"] == "int_label":    
         sex = int(request.form["sex"])
         orientation = int(request.form["orientation"])
         body_type = int(request.form["body_type"])
@@ -170,9 +170,9 @@ def classify_gb():
         pets = int(request.form["pets"])
         sign = int(request.form["sign"])
         smokes = int(request.form["smokes"])
-        age = int(request.form["age"])
-        height = int(request.form["height"])
-        income = int(request.form["income"])
+        age = int(le_dict["sc_age"].transform([[request.form["age"]]])[0])
+        height = int(le_dict["sc_height"].transform([[request.form["height"]]])[0])
+        income = int(le_dict["sc_income"].transform([[request.form["income"]]])[0])
     
     input_features = [
         sex,

@@ -10,9 +10,9 @@ model_svm = load_svm()
 def classify_svm(input_features):
     pred = model_svm.predict([input_features])
 
-    return le_status.inverse_transform(pred), pred[0]
+    return le_status.inverse_transform(pred)[0], int(pred[0])
 
 def classify_gb(input_features):
     pred = model_gb.predict([input_features])
 
-    return le_status.inverse_transform(pred), pred[0]
+    return le_status.inverse_transform(pred)[0], int(pred[0])

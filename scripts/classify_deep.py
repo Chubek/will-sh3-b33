@@ -11,6 +11,6 @@ def classify_deep(input_features):
 
     argmax = np.argmax(pred)
 
-    label = le_status.inverse_transform(argmax)
+    label = le_status.inverse_transform(argmax)[0]
 
-    return label, argmax[0], pred[argmax[0]]
+    return label, int(argmax[0]), float(pred[argmax[0]])

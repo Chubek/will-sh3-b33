@@ -1,4 +1,5 @@
-sklearn
+Cython==0.29.24
+scikit-learn==0.22.2.post1
 transformers
 torch
 gdown
