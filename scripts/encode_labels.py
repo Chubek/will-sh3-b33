@@ -15,7 +15,7 @@ def retrieve_name(var):
 
 
 
-def dowload_all_les():
+def download_all_les():
     if not os.path.exists(temp["MODEL_FOLDER"]):
         os.makedirs(temp["MODEL_FOLDER"])
 
@@ -61,6 +61,8 @@ def dowload_all_les():
 
 
 def load_all_les():
+    download_all_les()    
+
     le_status = None
     le_sex = None
     le_orientation = None 
@@ -93,14 +95,16 @@ def load_all_les():
             sc_height,
             sc_income]
 
+    dict_all = {}
+
     for le in list_all:
         name = retrieve_name(le) + ".pkl"
         path = os.path.join(temp['MODEL_FOLDER'], name)
 
         le = joblib.load(path)
 
+        dict_all[retrieve_name(le)] = le
 
-    dict_all = {retrieve_name(le): le for le in list_all}
 
     return dict_all
 
