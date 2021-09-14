@@ -1,7 +1,7 @@
 from scripts.classify_deep import classify_deep
 from scripts.classify_essay import classify_essay
 from scripts.classify_shallow import classify_gb, classify_svm
-from scripts.encode_labels import load_all_les
+from scripts.encode_labels import load_all_les, get_json_lab_cls
 from flask import Flask, request, jsonify, send_from_directory
 
 
@@ -21,6 +21,10 @@ def classify_text():
     cls, label, prob  = classify_essay(essay)
 
     return jsonify({"class": cls, "label": label, "prob": prob})
+
+@app.route("/get_all_les")
+def get_all_les():
+    return jsonify(get_json_lab_cls())
 
 
 @app.route("/classify_deep", methods=["POST"])
