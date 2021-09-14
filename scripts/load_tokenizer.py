@@ -15,7 +15,7 @@ def download_all_tokenizer():
 
     dict_urls = json.loads(temp['TOK_JSON'])
 
-    for k, v in dict_urls:
+    for k, v in dict_urls.items():
         path = os.path.join(tok_folder, k)
         if not os.path.exists(path):
             download_gdown(v, path)

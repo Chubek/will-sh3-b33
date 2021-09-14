@@ -122,7 +122,7 @@ def decode_label(le, lab):
 def get_json_lab_cls(le_dict):
     fin_json = {}
 
-    for k, v in le_dict:
+    for k, v in le_dict.items():
         if not "sc" in k:
             fin_json[k] = {l: m for l, m in zip(get_classes(v).tolist(), [encode_class(v, n) for n in get_classes(v).tolist()])}
 
