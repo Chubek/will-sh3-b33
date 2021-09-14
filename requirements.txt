@@ -1,0 +1,6 @@
+sklearn
+transformers
+torch
+gdown
+python-dotenv
+flask
