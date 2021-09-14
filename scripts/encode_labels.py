@@ -3,6 +3,7 @@ import os
 import inspect
 import joblib
 from scripts.utilities import download_gdown
+from copy import deepcopy
 
 temp = dotenv_values(".env")
 
@@ -63,21 +64,21 @@ def download_all_les():
 def load_all_les():
     download_all_les()    
 
-    le_status = None
-    le_sex = None
-    le_orientation = None 
-    le_body_type = None
-    le_diet = None
-    le_drinks = None
-    le_drugs = None
-    le_ethnicity = None
-    le_offspring = None
-    le_pets = None
-    le_sign = None
-    le_smokes = None
-    sc_age = None
-    sc_height = None
-    sc_income = None
+    le_status = "le_status"
+    le_sex = "le_sex"
+    le_orientation = "le_orientation" 
+    le_body_type = "le_body_type"
+    le_diet = "le_diet"
+    le_drinks = "le_drinks"
+    le_drugs = "le_drugs"
+    le_ethnicity = "le_ethnicity"
+    le_offspring = "le_offspring"
+    le_pets = "le_pets"
+    le_sign = "le_sign"
+    le_smokes = "le_smokes"
+    sc_age = "sc_age"
+    sc_height = "sc_height"
+    sc_income = "sc_income"
 
     list_all = [le_status,
             le_sex,
@@ -98,12 +99,13 @@ def load_all_les():
     dict_all = {}
 
     for le in list_all:
-        name = retrieve_name(le) + ".pkl"
+        name_copy = deepcopy(le)
+        name = le + ".pkl"
         path = os.path.join(temp['MODEL_FOLDER'], name)
 
         le = joblib.load(path)
 
-        dict_all[retrieve_name(le)] = le
+        dict_all[name_copy] = le
 
 
     return dict_all

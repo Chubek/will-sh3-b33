@@ -148,3 +148,7 @@ def classify_gb():
     cls, label  = classify_gb(input_features)
 
     return jsonify({"class": cls, "label": label})
+
+
+if __name__ == "__main__":
+    app.run()
