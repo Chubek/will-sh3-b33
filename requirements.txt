@@ -5,4 +5,4 @@ gdown
 python-dotenv
 flask
 tensorflow
-xgboost
+xgboost==0.90
