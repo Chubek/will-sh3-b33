@@ -5,3 +5,4 @@ gdown
 python-dotenv
 flask
 tensorflow
+xgboost
