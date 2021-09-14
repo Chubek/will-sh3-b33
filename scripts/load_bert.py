@@ -23,7 +23,7 @@ def download_bert():
 
 
 def load_bert():
-    path = load_bert()
+    path = download_bert()
     
     le_status = load_le_status()
     label_dict = {}
