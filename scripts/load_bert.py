@@ -38,4 +38,6 @@ def load_bert():
 
     model.to(device)
 
-    return model.load_state_dict(torch.load(path, map_location=torch.device('cpu')))
+    model.load_state_dict(torch.load(path, map_location=torch.device('cpu')))
+
+    return model

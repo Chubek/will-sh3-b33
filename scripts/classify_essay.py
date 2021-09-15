@@ -17,6 +17,6 @@ def classify_essay(essay_text):
 
     argmax = np.argmax(outputs)
 
-    label = le_status.inverse_transform(argmax)[0]
+    label = le_status.inverse_transform([argmax])[0]
 
-    return label, int(argmax[0]), float(outputs[argmax[0]])
+    return label, int(argmax), float(outputs["logits"].detach().numpy()[0][argmax])

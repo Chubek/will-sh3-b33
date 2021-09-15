@@ -15,4 +15,4 @@ def classify_svm(input_features):
 def classify_gb(input_features):
     pred = model_gb.predict(xgb.DMatrix([input_features]))
 
-    return le_status.inverse_transform(pred)[0], int(pred[0])
+    return le_status.inverse_transform([int(pred[0])])[0], int(pred[0])
