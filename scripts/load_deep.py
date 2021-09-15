@@ -3,12 +3,12 @@ from dotenv import dotenv_values
 import os
 from tensorflow import keras
 
-temp = dotenv_values(".env")
+temp = dotenv_values("env")
 
 def download_deep():
     if not os.path.exists(temp["MODEL_FOLDER"]):
         os.makedirs(temp["MODEL_FOLDER"])
-        
+
     deep_name = temp["DEEP_NAME"]
 
     path = os.path.join(temp['MODEL_FOLDER'], deep_name)

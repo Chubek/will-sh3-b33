@@ -4,7 +4,7 @@ import os
 from scripts.utilities import download_gdown
 from transformers import BertTokenizer
 
-temp = dotenv_values(".env")
+temp = dotenv_values("env")
 
 
 def download_all_tokenizer():

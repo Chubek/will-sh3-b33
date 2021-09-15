@@ -6,7 +6,7 @@ from scripts.encode_labels import load_le_status
 from config import device
 import torch
 
-temp = dotenv_values(".env")
+temp = dotenv_values("env")
 
 def download_bert():
     if not os.path.exists(temp["MODEL_FOLDER"]):

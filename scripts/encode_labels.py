@@ -5,7 +5,7 @@ import joblib
 from scripts.utilities import download_gdown
 from copy import deepcopy
 
-temp = dotenv_values(".env")
+temp = dotenv_values("env")
 
 def retrieve_name(var):
         for fi in reversed(inspect.stack()):

@@ -3,7 +3,7 @@ from dotenv import dotenv_values
 import os
 import joblib
 
-temp = dotenv_values(".env")
+temp = dotenv_values("env")
 
 
 def download_grad_boost():
@@ -23,7 +23,7 @@ def download_grad_boost():
 def download_svm():
     if not os.path.exists(temp["MODEL_FOLDER"]):
         os.makedirs(temp["MODEL_FOLDER"])
-        
+
     svm_name = temp["SVM_NAME"]
 
     path = os.path.join(temp['MODEL_FOLDER'], svm_name)
