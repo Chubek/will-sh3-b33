@@ -4,7 +4,5 @@ torch
 numpy
 gdown
 python-dotenv
-flask
 tensorflow
 xgboost==0.90
-gunicorn
