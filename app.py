@@ -3,7 +3,8 @@ from scripts.classify_essay import classify_essay
 from scripts.classify_shallow import classify_gb, classify_svm
 from scripts.encode_labels import load_all_les, get_json_lab_cls
 from flask import Flask, request, jsonify, send_from_directory
-
+import tensorflow as tf
+tf.get_logger().setLevel('INFO')
 
 app = Flask(__name__, static_url_path='/static')
 
