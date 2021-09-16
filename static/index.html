@@ -1,0 +1,107 @@
+<html lang="en">
+
+<head>
+    <title>Will Sh3 B33? -- Find Out Whether You'll Find Love</title>
+    <link type="text/css" rel="stylesheet" href="https://unpkg.com/bootstrap@4/dist/css/bootstrap.min.css" />
+    <link type="text/css" rel="stylesheet" href="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.css" />
+    <script src="//unpkg.com/vue@latest/dist/vue.min.js"></script>
+    <script src="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.js"></script>
+    <script src="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue-icons.min.js"></script>
+    <script src="https://unpkg.com/axios@latest/dist/axios.min.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <b-card no-body style="max-width: 60rem;" img-src="/static/logo.png" img-alt="logo" img-top>
+            <template #header>
+                <h4 class="mb-0">Will Sh3 B33?</h4>
+                <h6 class="mb-2">Find Out Whether You'll Find Love</h6>
+            </template>
+
+            <b-card-body>
+                <b-card-title>Dobro pozhalovat! Welcome! Khosh Amadid!</b-card-title>
+                <b-card-sub-title class="mb-2">And Marhaba!</b-card-sub-title>
+                <b-card-text>
+                    My name is Chubak.<br>
+                    I have prepared four models for you, three of them take your stats and predict whether you'll be
+                    single or find love --- and one of them takes and essay and will tell you the same.<br>
+                    All these are based on OkCupid data.
+                </b-card-text>
+            </b-card-body>
+
+            <b-card-body>
+                <a href="https://github.com/chubek/will-sh3-b33">Repository</a>
+                <a href="https://chubek.github.io/resume">My Resume</a>
+                <a href="https://chubek.github.io">My Blog</a>
+                </ul>
+            </b-card-body>
+
+            <b-card-footer>My Discord: <b>Chubak#7400</b></b-card-footer>
+
+        </b-card>
+    </div>
+
+    <h3 class="display-3">Classify Based on Physical and Mental Attributes</h3>
+    <blockquote class="blockquote">
+        <p>Select the attributes that best fit you and use one of our three models to predict whether you'll find
+            someone or not.</p>
+    </blockquote>
+    <div v-for="(le, index) in le_data" :key="index">
+        <h4 class="display-4">{{ le }}</h4>
+        <b-form-select
+            v-model="selected"
+            :options="options"
+            class="mb-3"
+            value-field="item"
+            text-field="name"
+            disabled-field="notEnabled"
+      ></b-form-select>
+    </div>
+
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                le_data: {},
+                diet: le_data["Diet"][0]["text"],
+                offspring: le_data["Offspring"][0]["text"],
+                sex: le_data["Sex"][0]["text"],
+                sign: le_data["Sign"][0]["text"],
+                ethnicity: le_data["Ethnicity"][0]["text"],
+                pets: le_data["Pets"][0]["text"],
+                smokes: le_data["Smokes"][0]["text"],
+                drugs: le_data["Drugs"][0]["text"],
+                orientation: le_data["Orientation"][0]["text"],
+                body_type: le_data["Body_type"][0]["text"],
+
+            },
+            created: function () {
+
+            },
+            mounted: function () {
+                axios.get("/get_all_les").then(function(res) {
+                    console.log(le_data);
+                    le_data = res;
+                })
+
+            },
+            computed: {
+
+            },
+            watch: {},
+            methods: {
+
+
+
+
+
+
+            },
+        })
+    </script>
+
+</body>
+
+
+</html>

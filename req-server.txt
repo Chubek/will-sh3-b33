@@ -1,3 +1,4 @@
 gevent
 gunicorn
 flask
+flask-cors

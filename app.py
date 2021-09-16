@@ -3,10 +3,13 @@ from scripts.classify_essay import classify_essay
 from scripts.classify_shallow import classify_gb, classify_svm
 from scripts.encode_labels import load_all_les, get_json_lab_cls
 from flask import Flask, request, jsonify, send_from_directory
+from flask_cors import CORS, cross_origin
 import tensorflow as tf
 tf.get_logger().setLevel('INFO')
 
 app = Flask(__name__, static_url_path='/static')
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 le_dict = load_all_les()
 
@@ -16,6 +19,7 @@ def root():
 
 
 @app.route("/classify_essay", methods=["POST"])
+@cross_origin()
 def classify_text():
     essay = request.form["essay"]
 
@@ -24,11 +28,13 @@ def classify_text():
     return jsonify({"class": cls, "label": label, "prob": prob})
 
 @app.route("/get_all_les")
+@cross_origin()
 def get_all_les():
     return jsonify(get_json_lab_cls(le_dict))
 
 
 @app.route("/classify_deep", methods=["POST"])
+@cross_origin()
 def classify_deep_func():
     if request.form["mode"] == "text_label":
         sex = int(le_dict["le_sex"].transform([[request.form["sex"]]])[0])
@@ -85,6 +91,7 @@ def classify_deep_func():
     return jsonify({"class": cls, "label": label, "prob": prob})
 
 @app.route("/classify_svm", methods=["POST"])
+@cross_origin()
 def classify_svm_func():
     if request.form["mode"] == "text_label":
         sex = int(le_dict["le_sex"].transform([[request.form["sex"]]])[0])
@@ -143,6 +150,7 @@ def classify_svm_func():
 
 
 @app.route("/classify_gb", methods=["POST"])
+@cross_origin()
 def classify_gb_func():
     if request.form["mode"] == "text_label":
         sex = int(le_dict["le_sex"].transform([[request.form["sex"]]])[0])
