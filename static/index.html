@@ -39,24 +39,25 @@
             <b-card-footer>My Discord: <b>Chubak#7400</b></b-card-footer>
 
         </b-card>
+
+        <h3 class="display-3">Classify Based on Physical and Mental Attributes</h3>
+        <blockquote class="blockquote">
+            <p>Select the attributes that best fit you and use one of our three models to predict whether you'll find
+                someone or not.</p>
+        </blockquote>
+        <div v-for="(le, index) in le_data" :key="index">
+            <h4 class="display-4">{{ le }}</h4>
+            <b-form-select
+                v-model="`${le.toLowerCase()}`"
+                :options="le_data[le]"
+                class="mb-3"
+                value-field="value"
+                text-field="text"
+          ></b-form-select>
+        </div>
     </div>
 
-    <h3 class="display-3">Classify Based on Physical and Mental Attributes</h3>
-    <blockquote class="blockquote">
-        <p>Select the attributes that best fit you and use one of our three models to predict whether you'll find
-            someone or not.</p>
-    </blockquote>
-    <div v-for="(le, index) in le_data" :key="index">
-        <h4 class="display-4">{{ le }}</h4>
-        <b-form-select
-            v-model="selected"
-            :options="options"
-            class="mb-3"
-            value-field="item"
-            text-field="name"
-            disabled-field="notEnabled"
-      ></b-form-select>
-    </div>
+   
 
 
     <script>
@@ -82,7 +83,16 @@
             mounted: function () {
                 axios.get("/get_all_les").then(function(res) {
                     console.log(le_data);
-                    le_data = res;
+                    this.le_data = res;
+                    this.offspring = res["Offspring"][0]["text"]
+                    this.sex = lres["Sex"][0]["text"]
+                    this.sign = res["Sign"][0]["text"]
+                    this.ethnicity = res["Ethnicity"][0]["text"]
+                    this.pets = res["Pets"][0]["text"]
+                    this.smokes = res["Smokes"][0]["text"]
+                    this.drugs = res["Drugs"][0]["text"]
+                    this.orientation = res["Orientation"][0]["text"]
+                    this.body_type = res["Body_type"][0]["text"]
                 })
 
             },
