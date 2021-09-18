@@ -126,7 +126,7 @@ def get_json_lab_cls(le_dict):
 
     for k, v in le_dict.items():
         if not "sc" in k:
-            k_name = "_".join(k.split("_")[1:]).capitalize()
+            k_name = "_".join(k.split("_")[1:])
             fin_json[k_name] = [{"text": l, "value": m} for l, m in zip(get_classes(v).tolist(), [int(encode_class(v, n)[0]) for n in get_classes(v).tolist()])]
 
 

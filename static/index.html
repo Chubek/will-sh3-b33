@@ -1,18 +1,19 @@
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <title>Will Sh3 B33? -- Find Out Whether You'll Find Love</title>
     <link type="text/css" rel="stylesheet" href="https://unpkg.com/bootstrap@4/dist/css/bootstrap.min.css" />
     <link type="text/css" rel="stylesheet" href="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.css" />
-    <script src="//unpkg.com/vue@latest/dist/vue.min.js"></script>
-    <script src="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.js"></script>
-    <script src="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue-icons.min.js"></script>
-    <script src="https://unpkg.com/axios@latest/dist/axios.min.js"></script>
+    
 </head>
 
 <body>
     <div id="app">
-        <b-card no-body style="max-width: 60rem;" img-src="/static/logo.png" img-alt="logo" img-top>
+        <b-container class="fluid-container" fluid="md">
+            <b-row>
+            <b-col>
+        <b-card no-body style="max-width: 20rem;" img-src="/static/logo.png" img-alt="logo" img-top>
             <template #header>
                 <h4 class="mb-0">Will Sh3 B33?</h4>
                 <h6 class="mb-2">Find Out Whether You'll Find Love</h6>
@@ -39,61 +40,92 @@
             <b-card-footer>My Discord: <b>Chubak#7400</b></b-card-footer>
 
         </b-card>
+    </b-col>
+    <b-col>
+        <b-card>        
+            <b-card-title class="display-6">Classify Based on Physical and Mental Attributes</b-card-title>
+        
+            <b-card-body>Select the attributes that best fit you and use one of our three models to predict whether you'll find
+                someone or not.
 
-        <h3 class="display-3">Classify Based on Physical and Mental Attributes</h3>
-        <blockquote class="blockquote">
-            <p>Select the attributes that best fit you and use one of our three models to predict whether you'll find
-                someone or not.</p>
-        </blockquote>
-        <div v-for="(le, index) in le_data" :key="index">
-            <h4 class="display-4">{{ le }}</h4>
-            <b-form-select
-                v-model="`${le.toLowerCase()}`"
-                :options="le_data[le]"
-                class="mb-3"
-                value-field="value"
-                text-field="text"
-          ></b-form-select>
-        </div>
+
+
+                    <div v-for="(le, index) in Object.keys(le_data)" :key="index">
+                        <h6 class="display-6">{{ capitalize(le.replace("_", " ")) }}</h6>
+                        <b-form-select
+                            v-model="models[le]"
+                            :options="le_data[le]"
+                            class="mb-3"
+                            value-field="value"
+                            text-field="text"
+                      ></b-form-select>                
+                    </div>
+                    <h6>Age</h6>
+                    <b-form-input v-model="age" placeholder="Age"></b-form-input>
+                    <h6>Income</h6>
+                    <b-form-input v-model="income" placeholder="Income"></b-form-input>
+                    <h6>Height</h6>
+                    <b-form-input v-model="height" placeholder="Height"></b-form-input>
+                    <b-form-checkbox
+                      v-model="height_impirial"
+                      name="height_impirial"
+                      value="true"
+                      unchecked-value="false"
+                  >
+                    Metric Units?
+                  </b-form-checkbox>
+            </b-card-body>
+        </b-card>
+
+    </b-col>
+    </b-row>
+    </b-container>
     </div>
-
-   
-
-
+    
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <!--- <script src="https://unpkg.com/vue@latest/dist/vue.min.js"></script> --->
+    <script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.js"></script>
+    <script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue-icons.min.js"></script>
+    <script src="https://unpkg.com/axios@latest/dist/axios.min.js"></script>
     <script>
-        new Vue({
+        var app = new Vue({
             el: '#app',
-            data: {
-                le_data: {},
-                diet: le_data["Diet"][0]["text"],
-                offspring: le_data["Offspring"][0]["text"],
-                sex: le_data["Sex"][0]["text"],
-                sign: le_data["Sign"][0]["text"],
-                ethnicity: le_data["Ethnicity"][0]["text"],
-                pets: le_data["Pets"][0]["text"],
-                smokes: le_data["Smokes"][0]["text"],
-                drugs: le_data["Drugs"][0]["text"],
-                orientation: le_data["Orientation"][0]["text"],
-                body_type: le_data["Body_type"][0]["text"],
-
+            data: () => {
+                return{
+                    le_data: {},
+                    models: {
+                        "diet": 0,
+                        "offspring": 0,
+                        "sex": 0,
+                        "sign": 0,
+                        "ethnicity": 0,
+                        "pets": 0,
+                        "smokes": 0,
+                        "drugs": 0,
+                        "orientation": 0,
+                        "body_type": 0,
+                        "drinks": 0,
+                    
+                    },
+                    height: "6'11\"",
+                    height_impirial: "false",
+                    income: 1200,
+                    age: 18,
+                    
+                    
+                }
+                
             },
             created: function () {
-
+                console.log("created");
             },
-            mounted: function () {
-                axios.get("/get_all_les").then(function(res) {
-                    console.log(le_data);
-                    this.le_data = res;
-                    this.offspring = res["Offspring"][0]["text"]
-                    this.sex = lres["Sex"][0]["text"]
-                    this.sign = res["Sign"][0]["text"]
-                    this.ethnicity = res["Ethnicity"][0]["text"]
-                    this.pets = res["Pets"][0]["text"]
-                    this.smokes = res["Smokes"][0]["text"]
-                    this.drugs = res["Drugs"][0]["text"]
-                    this.orientation = res["Orientation"][0]["text"]
-                    this.body_type = res["Body_type"][0]["text"]
-                })
+            mounted() {
+                console.log("mounted");
+                axios.get("/get_all_les").then((res) => {
+                    console.log(res);
+                    res = res.data;
+                    delete res["status"];
+                    this.le_data = res;                })
 
             },
             computed: {
@@ -101,14 +133,23 @@
             },
             watch: {},
             methods: {
+                capitalize: (string) => {
+                    return string.charAt(0).toUpperCase() + string.slice(1);
 
+                },
 
-
-
+                parseHeight0: (height) => {
+                    if (this.height_impirial == "true") {
+                        return height.replace("'", "").replace('"', '');
+                    } else {
+                        return parseInt(parseInt(height) / 0.3048)
+                    }
+                }
 
 
             },
         })
+
     </script>
 
 </body>
