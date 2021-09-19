@@ -4,6 +4,7 @@ from scripts.classify_shallow import classify_gb, classify_svm
 from scripts.encode_labels import load_all_les, get_json_lab_cls
 from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS, cross_origin
+from scripts.get_sample import serve_random
 import tensorflow as tf
 tf.get_logger().setLevel('INFO')
 
@@ -147,7 +148,10 @@ def classify_svm_func():
 
     return jsonify({"class": cls, "label": label})
 
-
+@app.route("/serve_random")
+@cross_origin()
+def random_serve():
+    return jsonify({"res_rand": serve_random()})
 
 @app.route("/classify_gb", methods=["POST"])
 @cross_origin()

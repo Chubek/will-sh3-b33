@@ -6,3 +6,4 @@ gdown
 python-dotenv
 tensorflow
 xgboost==0.90
+pandas

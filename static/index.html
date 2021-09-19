@@ -67,27 +67,42 @@
                                 unchecked-value="false">
                                 Metric Units?
                             </b-form-checkbox>
-                            <b-container class="mt-3" fluid="md">
-                                <b-col align-v="end">
-                                    <b-row class="mt-3 row-cols-sm-1">
-                                        <b-button v-on:click="submitClassify('svm')" variant="danger">
-                                            Classify with SVM Model</b-button>
-                                    </b-row>
-                                    <b-row class="mt-3 row-cols-sm-1">
-                                        <b-button v-on:click="submitClassify('gb')" variant="danger">
-                                            Classify with Boost Model</b-button>
-                                    </b-row>
-                                    <b-row class="mt-3 row-cols-sm-1">
-                                        <b-button v-on:click="submitClassify('deep')" variant="danger">
-                                            Classify with Deep Model</b-button>
-                                    </b-row>
-                                </b-col>
-                            </b-container>
+                            <b-button-group class="mt-3">
+                                <b-button v-on:click="submitClassify('svm')" variant="danger">
+                                    Classify with SVM Model</b-button>
+
+                                <b-button v-on:click="submitClassify('gb')" variant="info">
+                                    Classify with Boost Model</b-button>
+
+                                <b-button v-on:click="submitClassify('deep')" variant="warning">
+                                    Classify with Deep Model</b-button>
+
+                            </b-button-group>
+                        </b-card-body>
+                    </b-card>
+
+                </b-col>
+
+                <b-col>
+                    <b-card>
+                        <b-card-title>Classify Based on Essay</b-card-title>
+                        <b-card-body>
+                            Write an eassay about what you're looking for in a woman.
+                            <b-button class="mt-3" v-on:click="serveRandom()">
+                                <b-icon icon="exclamation-circle-fill" variant="danger"></b-icon>View a Random Essay
+                            </b-button>
+                            <b-form-textarea class="mt-3" id="textarea" v-model="essay_text" placeholder="Write and essay..." rows="3"
+                                max-rows="6"></b-form-textarea>
+
+                            <b-button class="mt-3"variant="primary" v-on:click="submitEssay()">
+                                <b-icon icon="chevron-right" variant="success"></b-icon>Submit Essay
+                            </b-button>
 
                         </b-card-body>
                     </b-card>
 
                 </b-col>
+
             </b-row>
         </b-container>
         <b-modal id="my-modal">
@@ -104,6 +119,11 @@
                     <h5>Model Used: <b class="text-success">{{ model_used }}</b></h5>
                 </b-row>
             </b-container>
+
+        </b-modal>
+
+        <b-modal id="sample-modal">
+            <p>{{ rand_essay }}</p>
 
         </b-modal>
     </div>
@@ -138,8 +158,9 @@
                     income: 1200,
                     age: 18,
                     status: "Not Defined Yet",
-                    model_used: "None"
-
+                    model_used: "None",
+                    rand_essay: "None",
+                    essay_text: "Write an essay..."
                 }
 
             },
@@ -180,6 +201,15 @@
                 showModal() {
                     this.$bvModal.show("my-modal")
                 },
+                showSample() {
+                    this.$bvModal.show("sample-modal")
+                },
+                serveRandom() {
+                    axios.get("/serve_random").then((response) => {
+                        app.rand_essay = response.data.res_rand;
+                        app.showSample();
+                    })
+                },
                 submitClassify(type) {
                     let bodyFormData = new FormData();
                     console.log(this.$bvModal);
@@ -209,6 +239,32 @@
                     axios({
                             method: "post",
                             url: url,
+                            data: bodyFormData,
+                            headers: {
+                                "Content-Type": "multipart/form-data"
+                            },
+                        })
+                        .then(function (response) {
+                            app.status = response.data.class;
+                            app.showModal();
+                        })
+                        .catch(function (response) {
+                            console.log(response);
+                        });
+                },
+                submitEssay(type) {
+                    let bodyFormData = new FormData();
+                    
+
+                    bodyFormData.append('essay', this.essay_text);
+
+
+                   
+                    this.model_used = "Essay Classifer";
+
+                    axios({
+                            method: "post",
+                            url: "/classify_essay",
                             data: bodyFormData,
                             headers: {
                                 "Content-Type": "multipart/form-data"
