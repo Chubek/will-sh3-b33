@@ -5,83 +5,109 @@
     <title>Will Sh3 B33? -- Find Out Whether You'll Find Love</title>
     <link type="text/css" rel="stylesheet" href="https://unpkg.com/bootstrap@4/dist/css/bootstrap.min.css" />
     <link type="text/css" rel="stylesheet" href="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.css" />
-    
+
 </head>
 
 <body>
     <div id="app">
         <b-container class="fluid-container" fluid="md">
-            <b-row>
-            <b-col>
-        <b-card no-body style="max-width: 20rem;" img-src="/static/logo.png" img-alt="logo" img-top>
-            <template #header>
-                <h4 class="mb-0">Will Sh3 B33?</h4>
-                <h6 class="mb-2">Find Out Whether You'll Find Love</h6>
-            </template>
+            <b-row class="row-lg-3">
+                <b-col class="col-md-4">
+                    <b-card no-body style="max-width: 20rem;" img-src="/static/logo.png" img-alt="logo" img-top>
+                        <template #header>
+                            <h4 class="mb-0">Will Sh3 B33?</h4>
+                            <h6 class="mb-2">Find Out Whether You'll Find Love</h6>
+                        </template>
 
-            <b-card-body>
-                <b-card-title>Dobro pozhalovat! Welcome! Khosh Amadid!</b-card-title>
-                <b-card-sub-title class="mb-2">And Marhaba!</b-card-sub-title>
-                <b-card-text>
-                    My name is Chubak.<br>
-                    I have prepared four models for you, three of them take your stats and predict whether you'll be
-                    single or find love --- and one of them takes and essay and will tell you the same.<br>
-                    All these are based on OkCupid data.
-                </b-card-text>
-            </b-card-body>
+                        <b-card-body>
+                            <b-card-title>Dobro pozhalovat! Welcome! Khosh Amadid!</b-card-title>
+                            <b-card-sub-title class="mb-2">And Marhaba!</b-card-sub-title>
+                            <b-card-text>
+                                My name is Chubak.<br>
+                                I have prepared four models for you, three of them take your stats and predict whether
+                                you'll be
+                                single or find love --- and one of them takes and essay and will tell you the same.<br>
+                                All these are based on OkCupid data.
+                            </b-card-text>
+                        </b-card-body>
 
-            <b-card-body>
-                <a href="https://github.com/chubek/will-sh3-b33">Repository</a>
-                <a href="https://chubek.github.io/resume">My Resume</a>
-                <a href="https://chubek.github.io">My Blog</a>
-                </ul>
-            </b-card-body>
+                        <b-card-body>
+                            <a href="https://github.com/chubek/will-sh3-b33">Repository</a>
+                            <a href="https://chubek.github.io/resume">My Resume</a>
+                            <a href="https://chubek.github.io">My Blog</a>
+                            </ul>
+                        </b-card-body>
 
-            <b-card-footer>My Discord: <b>Chubak#7400</b></b-card-footer>
+                        <b-card-footer>My Discord: <b>Chubak#7400</b></b-card-footer>
 
-        </b-card>
-    </b-col>
-    <b-col>
-        <b-card>        
-            <b-card-title class="display-6">Classify Based on Physical and Mental Attributes</b-card-title>
-        
-            <b-card-body>Select the attributes that best fit you and use one of our three models to predict whether you'll find
-                someone or not.
+                    </b-card>
+                </b-col>
+                <b-col class="col-md-4">
+                    <b-card>
+                        <b-card-title class="display-6">Classify Based on Physical and Mental Attributes</b-card-title>
+
+                        <b-card-body>Select the attributes that best fit you and use one of our three models to predict
+                            whether you'll find
+                            someone or not.
 
 
 
-                    <div v-for="(le, index) in Object.keys(le_data)" :key="index">
-                        <h6 class="display-6">{{ capitalize(le.replace("_", " ")) }}</h6>
-                        <b-form-select
-                            v-model="models[le]"
-                            :options="le_data[le]"
-                            class="mb-3"
-                            value-field="value"
-                            text-field="text"
-                      ></b-form-select>                
-                    </div>
-                    <h6>Age</h6>
-                    <b-form-input v-model="age" placeholder="Age"></b-form-input>
-                    <h6>Income</h6>
-                    <b-form-input v-model="income" placeholder="Income"></b-form-input>
-                    <h6>Height</h6>
-                    <b-form-input v-model="height" placeholder="Height"></b-form-input>
-                    <b-form-checkbox
-                      v-model="height_impirial"
-                      name="height_impirial"
-                      value="true"
-                      unchecked-value="false"
-                  >
-                    Metric Units?
-                  </b-form-checkbox>
-            </b-card-body>
-        </b-card>
+                            <div v-for="(le, index) in Object.keys(le_data)" :key="index">
+                                <h6 class="display-6">{{ capitalize(le.replace("_", " ")) }}</h6>
+                                <b-form-select v-model="models[le]" :options="le_data[le]" class="mb-3"
+                                    value-field="value" text-field="text"></b-form-select>
+                            </div>
+                            <h6>Age</h6>
+                            <b-form-input v-model="age" placeholder="Age"></b-form-input>
+                            <h6>Income</h6>
+                            <b-form-input v-model="income" placeholder="Income"></b-form-input>
+                            <h6>Height</h6>
+                            <b-form-input v-model="height" placeholder="Height"></b-form-input>
+                            <b-form-checkbox v-model="height_impirial" name="height_impirial" value="true"
+                                unchecked-value="false">
+                                Metric Units?
+                            </b-form-checkbox>
+                            <b-container class="mt-3" fluid="md">
+                                <b-col align-v="end">
+                                    <b-row class="mt-3 row-cols-sm-1">
+                                        <b-button v-on:click="submitClassify('svm')" variant="danger">
+                                            Classify with SVM Model</b-button>
+                                    </b-row>
+                                    <b-row class="mt-3 row-cols-sm-1">
+                                        <b-button v-on:click="submitClassify('gb')" variant="danger">
+                                            Classify with Boost Model</b-button>
+                                    </b-row>
+                                    <b-row class="mt-3 row-cols-sm-1">
+                                        <b-button v-on:click="submitClassify('deep')" variant="danger">
+                                            Classify with Deep Model</b-button>
+                                    </b-row>
+                                </b-col>
+                            </b-container>
 
-    </b-col>
-    </b-row>
-    </b-container>
+                        </b-card-body>
+                    </b-card>
+
+                </b-col>
+            </b-row>
+        </b-container>
+        <b-modal id="my-modal">
+            <b-container>
+                <b-row>
+                    <b-col>
+                        <h4>You will be... <strong class="text-primary">{{ status }}</strong>.</h4>
+                    </b-col>
+                    <b-col>
+                        <img src="/static/bee_learn.png" alt="Bee Learn">
+                    </b-col>
+                </b-row>
+                <b-row>
+                    <h5>Model Used: <b class="text-success">{{ model_used }}</b></h5>
+                </b-row>
+            </b-container>
+
+        </b-modal>
     </div>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
     <!--- <script src="https://unpkg.com/vue@latest/dist/vue.min.js"></script> --->
     <script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.js"></script>
@@ -91,7 +117,7 @@
         var app = new Vue({
             el: '#app',
             data: () => {
-                return{
+                return {
                     le_data: {},
                     models: {
                         "diet": 0,
@@ -105,16 +131,17 @@
                         "orientation": 0,
                         "body_type": 0,
                         "drinks": 0,
-                    
+
                     },
                     height: "6'11\"",
                     height_impirial: "false",
                     income: 1200,
                     age: 18,
-                    
-                    
+                    status: "Not Defined Yet",
+                    model_used: "None"
+
                 }
-                
+
             },
             created: function () {
                 console.log("created");
@@ -125,7 +152,8 @@
                     console.log(res);
                     res = res.data;
                     delete res["status"];
-                    this.le_data = res;                })
+                    this.le_data = res;
+                })
 
             },
             computed: {
@@ -138,18 +166,66 @@
 
                 },
 
-                parseHeight0: (height) => {
+                parseHeight: (height) => {
                     if (this.height_impirial == "true") {
                         return height.replace("'", "").replace('"', '');
                     } else {
                         return parseInt(parseInt(height) / 0.3048)
                     }
+                },
+
+                hideModal() {
+                    this.$bvModal.hide("my-modal");
+                },
+                showModal() {
+                    this.$bvModal.show("my-modal")
+                },
+                submitClassify(type) {
+                    let bodyFormData = new FormData();
+                    console.log(this.$bvModal);
+                    for (k in this.models) {
+                        console.log(k)
+                        bodyFormData.append(k, this.models[k]);
+                    }
+
+                    bodyFormData.append('height', this.parseHeight(this.height));
+                    bodyFormData.append('income', this.parseHeight(this.income));
+                    bodyFormData.append('age', this.parseHeight(this.age));
+
+                    bodyFormData.append('mode', 'int_label');
+
+                    if (type == "svm") {
+                        url = "classify_svm";
+                        this.model_used = "SVM";
+                    } else if (type == "bg") {
+                        url = "classify_bg";
+                        this.model_used = "Boost";
+                    } else {
+                        url = "classify_deep";
+                        this.model_used = "Deep";
+                    }
+
+
+                    axios({
+                            method: "post",
+                            url: url,
+                            data: bodyFormData,
+                            headers: {
+                                "Content-Type": "multipart/form-data"
+                            },
+                        })
+                        .then(function (response) {
+                            app.status = response.data.class;
+                            app.showModal();
+                        })
+                        .catch(function (response) {
+                            console.log(response);
+                        });
                 }
 
 
             },
         })
-
     </script>
 
 </body>
