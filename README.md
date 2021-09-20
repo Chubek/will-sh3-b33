@@ -3,6 +3,9 @@ This repository contains code that trains four deep and shallow models and backe
 
 I used [data from OkCupid](https://www.kaggle.com/andrewmvd/okcupid-profiles) to train four models where the target is "status" column of the data. Status being single, married, in relationship, etc. 
 
+## Model is Online!
+You can find it here ---> https://willsh3b33.xyz
+
 ## Shallow Models
 
 There are two shallow models in this model. One's a gradient boost using XGBoost, and one's an OVR SVM using Libsvm through Sklearn. 
