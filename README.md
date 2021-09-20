@@ -32,9 +32,9 @@ I haven't included the models in this repositry because it's a bad practice to d
 
 Link:
 ```
-https://cdn.discordapp.com/attachments/797919965264085092/887168285982982144/env
+https://cdn.discordapp.com/attachments/797919965264085092/889497440179343360/env
 ```
 
-**NOTE:** Add a period to the beginning of the file name, i.e. make it `.env`.
+**NOTE:** Name of the file should be `env`, not `.env`!
 
 The frontend is coming soon!
