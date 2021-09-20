@@ -13,6 +13,6 @@ RUN pip install --no-cache-dir -r req-sklearn.txt
 RUN pip install --no-cache-dir -r req-server.txt
 
 
-RUN wget https://cdn.discordapp.com/attachments/797919965264085092/887758465190203402/env
+RUN wget https://cdn.discordapp.com/attachments/797919965264085092/889490572799262730/env
 
 ENTRYPOINT ["./boot.sh"]
